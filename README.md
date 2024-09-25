@@ -1,36 +1,29 @@
 # SelectWise
 
-Natural Language Processing project on multiple choice question answering on the [QASC dataset](https://huggingface.co/datasets/allenai/qasc).
+**Natural Language Processing** project on multiple choice question answering on the [QASC dataset](https://huggingface.co/datasets/allenai/qasc).
 
 Each item consists of a question, eight multiple choices (from 'A' to 'H') and two facts that provide information
 about the question, the task being to select the correct answer. The multiple-choice task can be seen as a
-single-label, multi-class classification between the eight possible alternatives. The questions are about grade school science.
-
-<figure>
-  <img src="https://github.com/AlessandroGhiotto/SelectWise/blob/main/imgs/1_wordcloud.png" alt="Word cloud">
-  <figcaption>World cloud generated from the training data</figcaption>
-</figure>
+**single-label multi-class classification** between the eight possible alternatives. The questions are about grade school science, here we can see the word cloud generated from the training data: ![word cloud]("https://github.com/AlessandroGhiotto/SelectWise/blob/main/imgs/1_wordcloud.png")
 
 To complete the project, I began by implementing simple, foundational methods in NLP, knowing they would
 not produce state-of-the-art results but would still be valuable for understanding the evolution of the field. I
-started with TF-IDF, a basic yet effective method for capturing the importance of words in a document, and
+started with **TF-IDF**, a basic yet effective method for capturing the importance of words in a document, and
 experimented with bigram/trigram language models.
 
-Next, I explored neural models for generating word embeddings, such as Word2Vec, which is trained to
+Next, I explored neural models for generating **word embeddings**, such as Word2Vec, which is trained to
 predict the context of a given word. For sentence similarity, I primarily used cosine similarity to compare
 vector representations from both TF-IDF and word embeddings, selecting the alternative with the highest
 cosine similarity score.
 
-Finally, I implemented BERT and large language models (LLMs) that utilize the transformer architecture,
+Finally, I implemented **BERT** and **large language models** (LLMs) that utilize the transformer architecture,
 which is currently state-of-the-art for sequence-to-sequence tasks. Specifically, I examined the encoder
 (BERT-like models are encoder-only) that extracts meaning from input sequences and the decoder (LLMs
 are decoder-only) that generates new sequences based on the input.
 
 ## Models
 
-The models can be downloaded at the following Google Drive link:
-
-https://drive.google.com/file/d/1C_AeDhgTwvPTqQOXj01beEMnr6Kkqf2_/view?usp=sharing
+The models can be downloaded [here](https://drive.google.com/file/d/1C_AeDhgTwvPTqQOXj01beEMnr6Kkqf2_/view?usp=sharing)
 
 Unzip the file and move the 'models' folder into the 'SelectWise' folder. In the `./models` folder I have saved the models trained in the notebooks. This models can be loaded and used for evaluation.
 
