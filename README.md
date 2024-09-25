@@ -4,21 +4,35 @@ Natural Language Processing project on multiple choice question answering on the
 
 Each item consists of a question, eight multiple choices (from 'A' to 'H') and two facts that provide information
 about the question, the task being to select the correct answer. The multiple-choice task can be seen as a
-single-label, multi-class classification between the eight possible alternatives.
+single-label, multi-class classification between the eight possible alternatives. The questions are about grade school science.
 
-## Description
+<figure>
+  <img src="https://github.com/AlessandroGhiotto/SelectWise/blob/main/imgs/1_wordcloud.png" alt="Word cloud">
+  <figcaption>World cloud generated from the training data</figcaption>
+</figure>
 
-### Models
+To complete the project, I began by implementing simple, foundational methods in NLP, knowing they would
+not produce state-of-the-art results but would still be valuable for understanding the evolution of the field. I
+started with TF-IDF, a basic yet effective method for capturing the importance of words in a document, and
+experimented with bigram/trigram language models.
 
-The models can be downloaded at the followin Google Drive link:
+Next, I explored neural models for generating word embeddings, such as Word2Vec, which is trained to
+predict the context of a given word. For sentence similarity, I primarily used cosine similarity to compare
+vector representations from both TF-IDF and word embeddings, selecting the alternative with the highest
+cosine similarity score.
+
+Finally, I implemented BERT and large language models (LLMs) that utilize the transformer architecture,
+which is currently state-of-the-art for sequence-to-sequence tasks. Specifically, I examined the encoder
+(BERT-like models are encoder-only) that extracts meaning from input sequences and the decoder (LLMs
+are decoder-only) that generates new sequences based on the input.
+
+## Models
+
+The models can be downloaded at the following Google Drive link:
 
 https://drive.google.com/file/d/1C_AeDhgTwvPTqQOXj01beEMnr6Kkqf2_/view?usp=sharing
 
 Unzip the file and move the 'models' folder into the 'SelectWise' folder. In the `./models` folder I have saved the models trained in the notebooks. This models can be loaded and used for evaluation.
-
-### Images
-
-In the `./imgs` folder I have saved the images which are opened in the notebooks.
 
 ## Notebooks
 
@@ -30,35 +44,35 @@ In the notebooks the images are inserted in this way: `![picture](../imgs/img_na
 
 ### Notebook 1 - Count based methods:
 
-1. Look at the Dataset
-2. Representing documents with TF-IDF weighting:
-   - Normal tf-idf
-   - tf-idf truncated with SVD
-   - tf-idf based retrieval from train set
-3. n-gram LM based classification
+- Look at the Dataset
+- Representing documents with TF-IDF weighting:
+  - Normal tf-idf
+  - tf-idf truncated with SVD
+  - tf-idf based retrieval from train set
+- n-gram LM based classification
 
 ### Notebook 2 - Word Embeddings:
 
-1. Representation by means of static word embeddings:
-   - Word2Vec
-   - GloVE
-   - FastText
-   - Doc2Vec
-2. Other ways of combining word embeddings:
-   - Remove duplicated words
-   - Word embeddings weighted by their idf score
-3. Other ways of choosing the answer:
-   - Siamese Neural Network
-   - Feed Forward Neural Network
+- Representation by means of static word embeddings:
+  - Word2Vec
+  - GloVE
+  - FastText
+  - Doc2Vec
+- Other ways of combining word embeddings:
+  - Remove duplicated words
+  - Word embeddings weighted by their idf score
+- Other ways of choosing the answer:
+  - Siamese Neural Network
+  - Feed Forward Neural Network
 
 ### Notebook 3 - Transformer Encoder Only:
 
-1. BERT:
-   - Binary classification - NextSentencePrediction
-   - Multiclass classification - MultipleChoice
-2. Different ways of tuning a pretrained models:
-   - Linear probing
-   - Mixed method
+- BERT:
+  - Binary classification - NextSentencePrediction
+  - Multiclass classification - MultipleChoice
+- Different ways of tuning a pretrained models:
+  - Linear probing
+  - Mixed method
 
 ### Notebook 4 - LLM Prompting:
 
