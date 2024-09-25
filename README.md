@@ -4,7 +4,9 @@
 
 Each item consists of a question, eight multiple choices (from 'A' to 'H') and two facts that provide information
 about the question, the task being to select the correct answer. The multiple-choice task can be seen as a
-**single-label multi-class classification** between the eight possible alternatives. The questions are about grade school science, here we can see the word cloud generated from the training data: ![word cloud](https://github.com/AlessandroGhiotto/SelectWise/blob/main/imgs/1_wordcloud.png)
+**single-label multi-class classification** between the eight possible alternatives. The questions are about grade school science, here we can see the word cloud generated from the training data:
+
+![word cloud](https://github.com/AlessandroGhiotto/SelectWise/blob/main/imgs/1_wordcloud.png)
 
 To complete the project, I began by implementing simple, foundational methods in NLP, knowing they would
 not produce state-of-the-art results but would still be valuable for understanding the evolution of the field. I
