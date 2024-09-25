@@ -76,3 +76,11 @@ In the `./Models` folder I have saved the models trained in the notebooks.
 ## requirements.txt
 
 In the `requirements.txt` file are present all the libraries used in the environment in which I have run the notebooks (output of the command `pip freeze > requirements.txt`)
+
+
+ @inproceedings{Khot2019QASC,
+   title={{QASC}: A Dataset for Question Answering via Sentence Composition},
+   author={Tushar Khot and Peter Clark and Michal Guerquin and Peter Alexander Jansen and Ashish Sabharwal},
+   booktitle={AAAI},
+   year={2019},
+  }
