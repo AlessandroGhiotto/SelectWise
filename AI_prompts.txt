@@ -1,0 +1,491 @@
+🟩 how can I create a config file for a python environment for anaconda, with the following libraries
+nltk
+collections
+sklearn
+pandas
+numpy
+seaborn
+genism
+datasets
+tokenizers
+torch
+transformers
+tqdm
+einops
+torchinfo
+accelerate
+huggingface_hub
+x_transformers
+
+🟩 once I have created the environment, how can I install new packages
+
+🟩 Do the kde plot of the question lengths in 'dataset'
+
+🟩 set the darkgrid theme for seaborn
+
+🟩 do the kde plot with the length of fact1 and fact2 (in the same plot)
+
+🟩 histogram of the answerKey
+
+🟩 get the 'text' from the 'choices' and check if all the texts constitute only of one word
+
+🟩 @workspace I have my dataset with this fields:
+{'id': '3E7TUJ2EGCLQNOV1WEAJ2NN9ROPD9K',
+ 'question': 'What type of water formation is formed by clouds?',
+ 'choices': {'text': ['pearls',
+   'streams',
+   'shells',
+   'diamonds',
+   'rain',
+   'beads',
+   'cooled',
+   'liquid'],
+  'label': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']},
+ 'answerKey': 'F',
+ 'fact1': 'beads of water are formed by water vapor condensing',
+ 'fact2': 'Clouds are made of water vapor.',
+ 'combinedfact': 'Beads of water can be formed by clouds.',
+ 'formatted_question': 'What type of water formation is formed by clouds? (A) pearls (B) streams (C) shells (D) diamonds (E) rain (F) beads (G) cooled (H) liquid'}
+How can I compute tf-idf on fact1+fact2+question and compute the cosine similarity with all the choices
+
+🟩 create a dataset "facts_and_question" in which we have f"{data['fact1']} {data['fact2']} {data['question']}"
+
+🟩 @workspace #selection how to create a pandas series in which I have as items "{data['fact1']} {data['fact2']} {data['question']}" for each row of the data
+
+🟩 quick look at the data
+
+🟩 #selection I have the "choices" columns in a pandas dataframe of this kind "choices": { "label": ["A", "B", "C", "D", "E", "F", "G", "H"], "text": ["sand", "occurs over a wide range", "forests", "Global warming", "rapid changes occur", "local weather conditions", "measure of motion", "city life"] },
+I want to create a column for each label, with the associated text
+
+🟩 #selection check that all the label are always ordered like ['A', 'B', 'C', 'D','E', 'F', G', 'H']
+
+🟩 check if there are uppercase entries in the vocabulary
+
+🟩 #selection look at one sample of the df_train_tfidf
+
+🟩 apply this pipeline to each col of the df_train_tfidf and store the results in a dict
+
+🟩 #selection compute the cosine similarity between the 'facts_and_questions' and all the choices 'A', 'B',... 'H'
+
+🟩 #selection predict as answerkey the choice with higher cosine similarity
+
+🟩  if all the cosine similarity are 0, pick randomly . but with a fixed seed for reproducibility
+
+🟩 make it a function of df_tfidf
+
+🟩 set a seed
+
+🟩 compute accuracy and f1 between pred and df['answerKey']
+
+🟩 @workspace truncate the tf-idf matrixes with SVD
+
+🟩 #selection instead of applying singularly svd to each key of the dict, concat all of them together, apply svd, split them again
+
+🟩 must be stacked vertically, not horizontally the cols
+
+🟩 #selection it is strange to get f1 score exactly equal to accuracy with micro average
+
+🟩 how can I compute the cosine similarity between two pandas series, but do it first with the first, second with the second, and outputs a series (not pairwise, not between all the elements)
+
+🟩 what if are just 2 numpy arrays
+
+🟩 how to transform a sparse matrix into a normal numpy array
+
+🟩 how to apply the argmax along the rows of a df
+
+🟩 map the argmax insices to the corresponding choices
+
+🟩 how to check if all the entries have just one word
+
+🟩 /tmp/ipykernel_849325/14407470.py:3: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use ser.iloc[pos]
+  df_train_ngram[choices] = df_train_ngram[choices].apply(lambda x: str(x.str.split().str[0]))
+
+🟩 I have 8 words for each row of a df, how to check that are all different
+
+🟩 AttributeError: 'Series' object has no attribute 'split'
+
+🟩 concat 'question' 'fact1' 'fact2' into a single serie
+
+🟩 along the column axis
+
+🟩 apply the split function to each entry
+
+🟩 get the index of best_choice
+
+🟩 get the idf (inverse document frequency) score for each word, from a list of documents
+
+🟩 could you do it in python
+
+🟩 'DataFrame' object has no attribute 'append'. how to iteratively add a row to a pandas df
+
+🟩 #selection RuntimeError: Expected a 'cuda' device type for generator but found 'cpu'
+
+🟩 for i, (facts_and_question, choice, label) in enumerate(train_loader) still gives the error
+
+🟩 #selection RuntimeError: mat1 and mat2 must have the same dtype, but got Double and Float
+
+🟩 #selection  torch.float64 RuntimeError: mat1 and mat2 must have the same dtype, but got Float and Double
+
+🟩 convert them to float64 instead of float32
+
+🟩 take a part of the train_data and use it as a val set
+
+🟩 #selection how would you improve the siamese neural network
+
+🟩 #selection ValueError: expected 2D or 3D input (got 1D input)
+
+🟩 #selection ValueError: only one element tensors can be converted to Python scalars
+
+🟩 ---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[38], line 21
+     17     predicted_choices = torch.argmax(output, dim=1)
+     18     return predicted_choices    
+---> 21 pred_train = argmax_predict_NeuralNetwork(df_train_noDuplicates, pretrained_W2V, model)
+     22 train_accuracy, train_f1 = evaluate_predictions(answerKey_train, pred_train, 'train')
+     23 print('')
+
+Cell In[38], line 8
+      6 data = {}
+      7 for col in ['facts_and_question', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']:
+----> 8     data[col] = torch.tensor(df[col].apply(lambda x: torch.tensor(sent_to_emb(x, pretrained_vectors)).float().to(mydevice)))
+     10 # apply the model to the data
+     11 # get the output for the 'facts_and_question' and all the choices
+     12 output = model(data['facts_and_question'], data['A'])
+
+File ~/.pyenv/versions/3.12.3/envs/nlp-env/lib/python3.12/site-packages/torch/utils/_device.py:79, in DeviceContext.__torch_function__(self, func, types, args, kwargs)
+     77 if func in _device_constructors() and kwargs.get('device') is None:
+     78     kwargs['device'] = self.device
+---> 79 return func(*args, **kwargs)
+
+ValueError: only one element tensors can be converted to Python scalars
+
+
+🟩 /fix InvalidParameterError: The 'y_pred' parameter of accuracy_score must be an array-like or a sparse matrix. Got 7546 instead.
+
+🟩 #selection try to improve the neural network
+
+🟩 make the markdown table for this data. cols = [train, validatino], rows = [accuracy, F1]
+train Accuracy: 0.88222 train F1 Score: 0.88209
+validation Accuracy: 0.85313 validation F1 Score: 0.85184
+
+🟩 write the code for writing it in markdown
+
+🟩 #selection decrease the overfitting of the model 
+
+🟩 def preprocess_function(examples):
+    first_sentences = [[context] * 4 for context in examples["sent1"]]
+    question_headers = examples["sent2"]
+    second_sentences = [
+        [f"{header} {examples[end][i]}" for end in ending_names] for i, header in enumerate(question_headers)
+    ]
+    first_sentences = sum(first_sentences, [])
+    second_sentences = sum(second_sentences, [])
+    tokenized_examples = tokenizer(first_sentences, second_sentences, truncation=True)
+    return {k: [v[i : i + 4] for i in range(0, len(v), 4)] for k, v in tokenized_examples.items()}
+Explain with an example step by step
+
+🟩 #selection   File <string>:35
+    self.embedding_layer = nn.Embedding(num_embeddings, embedding_dim, padding_idx=padding_idx)
+TabError: inconsistent use of tabs and spaces in indentation
+
+🟩 #selection explain why it use the slice on the out out = self.dropout(out) out = torch.relu_(self.fc1(out[:,-1,:]))
+
+🟩 #selection write it with the proper function from dataset module
+
+🟩 ---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[18], line 35
+     31         df['choices'] = [choice['text'] for choice in df['choices']]
+     33     return df
+---> 35 dataset_train = format_choices(dataset_train)
+     36 dataset_val = format_choices(dataset_val)
+     37 dataset_test = format_choices(dataset_test)
+Cell In[18], line 31
+     28 wrong_choices = [choice['label'] != correct_order for choice in dataset_train['choices']]
+     29 if sum(wrong_choices) == 0:
+     30     # get the text of the choices
+---> 31     df['choices'] = [choice['text'] for choice in df['choices']]
+     33 return df
+TypeError: 'Dataset' object does not support item assignment
+
+🟩 #selection  ---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Cell In[68], line 18
+     15     examples['input_ids'] = tokenized_examples['input_ids']
+     16     return examples
+---> 18 dataset_train_inputids = dataset.map(preprocess_function)#, remove_columns=dataset_train.column_names) #, batched=True)
+     19 # dataset_train_inputids = dataset_train_inputids.with_format("torch")
+     20 # print(dataset)
+
+File ~/.pyenv/versions/3.12.3/envs/nlp-env/lib/python3.12/site-packages/datasets/dataset_dict.py:870, in DatasetDict.map(self, function, with_indices, with_rank, input_columns, batched, batch_size, drop_last_batch, remove_columns, keep_in_memory, load_from_cache_file, cache_file_names, writer_batch_size, features, disable_nullable, fn_kwargs, num_proc, desc)
+    866 if cache_file_names is None:
+    867     cache_file_names = {k: None for k in self}
+    868 return DatasetDict(
+    869     {
+--> 870         k: dataset.map(
+    871             function=function,
+    872             with_indices=with_indices,
+    873             with_rank=with_rank,
+    874             input_columns=input_columns,
+    875             batched=batched,
+    876             batch_size=batch_size,
+    877             drop_last_batch=drop_last_batch,
+    878             remove_columns=remove_columns,
+    879             keep_in_memory=keep_in_memory,
+    880             load_from_cache_file=load_from_cache_file,
+...
+      8     ]
+     10     # Tokenize
+     11     tokenized_examples = fast_tokenizer(sentences, truncation=True)
+KeyError: 0
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings...
+
+🟩 #file:notebook3_contextualizedEmbeddings.ipynb apply the model to the data, and group the results by lists of 8 elements, and predict the argmax (for each list)
+
+🟩 #file:notebook3_contextualizedEmbeddings.ipynb Do you see any problem with the BiLSTM_Classifier? the loss stop to decrease after just a few epochs, and the performances on the task are very poor
+
+🟩 I still get the same problems, maybe there is some error in preparing the data.
+I have created 8 copied for each sample, each of them ends with one of the possible choices.
+Each of this have label 0 if the choice was wrong, and 1 if it was the correct one
+
+🟩 #selection attach to this transformer encoder a classification head with pytorch
+
+🟩 #selection expected a 'cuda' device generator but found 'cpu' with hugging face trainer
+
+---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+Cell In[131], line 20
+      8 dataset_val_encoded.set_format(type='torch', columns=['input_ids', 'attention_mask', 'answerKey'])
+     10 trainer = Trainer(
+     11     model,
+     12     args,
+   (...)
+     17     compute_metrics=compute_metrics,
+     18 )
+---> 20 trainer.train()
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/transformers/trainer.py:1938, in Trainer.train(self, resume_from_checkpoint, trial, ignore_keys_for_eval, **kwargs)
+   1936         hf_hub_utils.enable_progress_bars()
+   1937 else:
+-> 1938     return inner_training_loop(
+   1939         args=args,
+   1940         resume_from_checkpoint=resume_from_checkpoint,
+   1941         trial=trial,
+   1942         ignore_keys_for_eval=ignore_keys_for_eval,
+   1943     )
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/transformers/trainer.py:2236, in Trainer._inner_training_loop(self, batch_size, args, resume_from_checkpoint, trial, ignore_keys_for_eval)
+   2233     rng_to_sync = True
+   2235 step = -1
+...
+     77 if func in _device_constructors() and kwargs.get('device') is None:
+     78     kwargs['device'] = self.device
+---> 79 return func(*args, **kwargs)
+
+RuntimeError: Expected a 'cuda' device type for generator but found 'cpu'
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings...
+
+🟩 how can I move the dataset to cuda
+
+🟩 I'm trying to train the AutoModelForMultipleChoice with the trainer from HuggingFace, but I get:
+
+RuntimeError                              Traceback (most recent call last)
+Cell In[167], line 16
+      4     return {"accuracy": (preds == label_ids).astype(np.float32).mean().item()}
+      6 trainer = Trainer(
+      7     model,
+      8     args,
+   (...)
+     13     compute_metrics=compute_metrics,
+     14 )
+---> 16 trainer.train()
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/transformers/trainer.py:1938, in Trainer.train(self, resume_from_checkpoint, trial, ignore_keys_for_eval, **kwargs)
+   1936         hf_hub_utils.enable_progress_bars()
+   1937 else:
+-> 1938     return inner_training_loop(
+   1939         args=args,
+   1940         resume_from_checkpoint=resume_from_checkpoint,
+   1941         trial=trial,
+   1942         ignore_keys_for_eval=ignore_keys_for_eval,
+   1943     )
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/transformers/trainer.py:2236, in Trainer._inner_training_loop(self, batch_size, args, resume_from_checkpoint, trial, ignore_keys_for_eval)
+   2233     rng_to_sync = True
+   2235 step = -1
+-> 2236 for step, inputs in enumerate(epoch_iterator):
+   2237     total_batched_samples += 1
+   2239     if self.args.include_num_input_tokens_seen:
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/accelerate/data_loader.py:454, in DataLoaderShard.__iter__(self)
+    452 # We iterate one batch ahead to check when we are at the end
+    453 try:
+--> 454     current_batch = next(dataloader_iter)
+    455 except StopIteration:
+    456     yield
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:630, in _BaseDataLoaderIter.__next__(self)
+    627 if self._sampler_iter is None:
+    628     # TODO(https://github.com/pytorch/pytorch/issues/76750)
+    629     self._reset()  # type: ignore[call-arg]
+--> 630 data = self._next_data()
+    631 self._num_yielded += 1
+    632 if self._dataset_kind == _DatasetKind.Iterable and \
+    633         self._IterableDataset_len_called is not None and \
+    634         self._num_yielded > self._IterableDataset_len_called:
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:672, in _SingleProcessDataLoaderIter._next_data(self)
+    671 def _next_data(self):
+--> 672     index = self._next_index()  # may raise StopIteration
+    673     data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+    674     if self._pin_memory:
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/torch/utils/data/dataloader.py:620, in _BaseDataLoaderIter._next_index(self)
+    619 def _next_index(self):
+--> 620     return next(self._sampler_iter)
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/torch/utils/data/sampler.py:288, in BatchSampler.__iter__(self)
+    286 batch = [0] * self.batch_size
+    287 idx_in_batch = 0
+--> 288 for idx in self.sampler:
+    289     batch[idx_in_batch] = idx
+    290     idx_in_batch += 1
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/accelerate/data_loader.py:92, in SeedableRandomSampler.__iter__(self)
+     90 # print("Setting seed at epoch", self.epoch, seed)
+     91 self.generator.manual_seed(seed)
+---> 92 yield from super().__iter__()
+     93 self.set_epoch(self.epoch + 1)
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/torch/utils/data/sampler.py:168, in RandomSampler.__iter__(self)
+    166 else:
+    167     for _ in range(self.num_samples // n):
+--> 168         yield from torch.randperm(n, generator=generator).tolist()
+    169     yield from torch.randperm(n, generator=generator).tolist()[:self.num_samples % n]
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/torch/utils/_device.py:79, in DeviceContext.__torch_function__(self, func, types, args, kwargs)
+     77 if func in _device_constructors() and kwargs.get('device') is None:
+     78     kwargs['device'] = self.device
+---> 79 return func(*args, **kwargs)
+
+RuntimeError: Expected a 'cuda' device type for generator but found 'cpu'
+
+
+🟩 there is no generator, is used by the trainer, it isn't in my code
+
+🟩 from tqdm import tqdm
+
+generator = torch.Generator(device=mydevice)
+train_loader = torch.utils.data.DataLoader(dataset_train_encoded, batch_size=batch_size, shuffle=True, 
+                                           collate_fn=DataCollatorForMultipleChoice(tokenizer), generator=generator)
+loop = tqdm(train_loader)
+
+for batch in loop:
+    outputs = model(input_ids=batch['input_ids'], attention_mask=batch['attention_mask'],
+                    token_type_ids=batch['token_type_ids'], labels=batch['answerKey'])
+    break
+
+I get the following error:
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:762, in BatchEncoding.convert_to_tensors(self, tensor_type, prepend_batch_axis)
+    761 if not is_tensor(value):
+--> 762     tensor = as_tensor(value)
+    764     # Removing this for now in favor of controlling the shape with `prepend_batch_axis`
+    765     # # at-least2d
+    766     # if tensor.ndim > 2:
+    767     #     tensor = tensor.squeeze(0)
+    768     # elif tensor.ndim < 2:
+    769     #     tensor = tensor[None, :]
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:724, in BatchEncoding.convert_to_tensors.<locals>.as_tensor(value, dtype)
+    723     return torch.tensor(np.array(value))
+--> 724 return torch.tensor(value)
+
+File ~/.pyenv/versions/nlp-env/lib/python3.12/site-packages/torch/utils/_device.py:79, in DeviceContext.__torch_function__(self, func, types, args, kwargs)
+     78     kwargs['device'] = self.device
+---> 79 return func(*args, **kwargs)
+
+ValueError: too many dimensions 'str'
+
+The above exception was the direct cause of the following exception:
+
+ValueError                                Traceback (most recent call last)
+...
+    782             " expected)."
+    783         ) from e
+    785 return self
+
+ValueError: Unable to create tensor, you should probably activate truncation and/or padding with 'padding=True' 'truncation=True' to have batched tensors with the same length. Perhaps your features (`id` in this case) have excessive nesting (inputs type `list` where type `int` is expected).
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings...
+
+🟩 how to use the Trainer from huggingface manually, instead of using trainer.train()
+
+🟩 RuntimeError: Expected a 'cuda' device type for generator but found 'cpu'
+
+can I manually build the dataloader, with a generator.to(mydevice). or set the generator for the current dataloader
+
+🟩 trainer.evaluate(eval_dataset=val_dataloader)
+TypeError: 'DataLoader' object is not subscriptable
+
+🟩 how can I print just the information on the last layers of a pytorch model
+
+🟩 how can I measure both accuracy and f1 with evaluate from huggingface
+
+🟩 integrate it in this code, I'm not using the Trainer
+
+for batch in train_dataloader:
+    batch = {k: v.to(mydevice) for k, v in batch.items()}
+    with torch.no_grad():
+        outputs = model(**batch)
+
+    logits = outputs.logits
+    predictions = torch.argmax(logits, dim=-1)
+    metric.add_batch(predictions=predictions, references=batch["labels"])
+print(metric.compute())
+
+🟩 #selection create a pytorch model which takes as input the trf_model and attach it the following classification head
+  )
+  (dropout): Dropout(p=0.1, inplace=False)
+  (classifier): Linear(in_features=768, out_features=1, bias=True)
+)
+
+🟩 how can I create a format of this kind
+
+f"""
+Question: {item['question']}
+fact1: {item['fact1']}
+A) {item['choices'][0]}
+B) {item['choices'][1]}
+...
+H) {item['choices'][7]}
+Choose the correct choice. Answer with the corresponding letter only. 
+"""
+
+And then compile it each time by unpacking the **item, and formmating the propt with string formatting
+
+🟩 If I build the tf-idf representation on the train data, how can I get the tf-idf of a new sample
+
+🟩 I have the following code in pytorch:
+
+model.eval()
+
+accuracy_metric = evaluate.load("accuracy")
+
+t0 = timeit.default_timer()
+for batch in test_dataloader:
+    batch = {k: v.to(mydevice) for k, v in batch.items()}
+    with torch.no_grad():
+        outputs = model(**batch)
+    logits = outputs.logits
+    predictions = torch.argmax(logits, dim=-1)
+    accuracy_metric.add_batch(predictions=predictions, references=batch["labels"])
+
+how can I save the index of the samples that I have answered wrong, so I can look at those samples later
+
+🟩 I'm doing a project for the NLP exam, In which I have a question and 8 choices. a multiple choice task. I ask you some suggestion for the name of the project. I have chosen "classification Between Multiple Choices", but is quite boring
+
+🟩 could you check if the following conclusions for mine report on a NLP project are good:
+
+To do the project, I started with the simplest methods that we know will not produce incredible results, but are still interesting since they are the beginning of NLP. So with tf-idf, which is simple but still achieves meaningful performance, and a bigram/trigram LM. Then I tried the neural models used to generate word embeddings, such as Word2Vec, which is trained to predict the context given an input word. For the vector representations (both tf-idf and word embeddings), the main metric used to compare two sentences is cosine similarity, and among the possible alternatives I chose the one with the highest cosine similarity. Finally, BERT and LLM, which use (part of) the transformer architecture that is state of the art for seq2seq models. In particular, the encoder (BERT-like models are encoder-only) extracts the meaning from the input sequence, and the decoder (LLM are decoder-only) generates something new given the input. I wanted to thank you for the lessons and Dr. Marco Braga for answering my questions about the project.
